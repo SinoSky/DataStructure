@@ -12,7 +12,7 @@ typedef struct {
 	int size;//数组的最大容量
 	int topIndex;//代表栈顶的数组下标
 }OperatorStack;
-
+	/
 /*数值栈*/
 typedef struct {
 	double * base;
@@ -39,8 +39,8 @@ int calculate(NumberStack *,OperatorStack *);
 int isDigit(char);
 
 /**
-* 初始化字符栈
-*/
+ * 初始化字符栈
+ */
 int initOp(OperatorStack * stack) {
 	stack->size = INIT_SIZE;
 	stack->base = (char *)malloc(stack->size * sizeof(char));
@@ -52,10 +52,10 @@ int initOp(OperatorStack * stack) {
 
 	return 0;
 }
-
+	
 /**
-* 初始化数字栈
-*/
+ * 初始化数字栈
+ */
 int init(NumberStack * stack) {
 	stack->size = INIT_SIZE;
 	stack->base = (double *)malloc(stack->size * sizeof(double));
@@ -69,8 +69,8 @@ int init(NumberStack * stack) {
 }
 
 /**
-* 字符入栈操作
-*/
+ * 字符入栈操作
+ */
 int pushOp(OperatorStack *stack, char element) {
 	
 	if (stack->topIndex>=stack->size-1) {
@@ -89,8 +89,8 @@ int pushOp(OperatorStack *stack, char element) {
 }
 
 /**
-* 数字入栈操作
-*/
+ * 数字入栈操作
+ */
 int push(NumberStack *stack, double element) {
 
 	if (stack->topIndex >= stack->size - 1) {
@@ -109,8 +109,8 @@ int push(NumberStack *stack, double element) {
 }
 
 /**
-* 出字符栈操作
-*/
+ * 出字符栈操作
+ */
 int popOp(OperatorStack *stack) {
 	if (stack->topIndex<0) {
 		printf("字符栈中无元素可出！\n");
@@ -122,8 +122,8 @@ int popOp(OperatorStack *stack) {
 }
 	
 /**
-* 出数字栈操作
-*/
+ * 出数字栈操作
+ */
 int pop(NumberStack *stack) {
 	if (stack->topIndex < 0) {
 		printf("数字栈中无元素可出！\n");
@@ -135,8 +135,8 @@ int pop(NumberStack *stack) {
 }
 
 /**
-* 返回字符栈顶元素
-*/
+ * 返回字符栈顶元素
+ */
 char getTopOp(OperatorStack *stack) {
 	if (stack->topIndex<0) {
 		printf("字符栈顶为空\n");
@@ -146,8 +146,8 @@ char getTopOp(OperatorStack *stack) {
 }
 
 /**
-* 返回数字栈顶元素
-*/
+ * 返回数字栈顶元素
+ */
 double getTop(NumberStack *stack) {
 	if (stack->topIndex<0) {
 		printf("数字栈顶为空\n");
@@ -157,22 +157,22 @@ double getTop(NumberStack *stack) {
 }
 
 /**
-* 判断字符栈是否为空
-*/
+ * 判断字符栈是否为空
+ */
 int isEmptyOp(OperatorStack * stack) {
 	return stack->topIndex < 0;
 }
 
 /**
-* 判断数字栈是否为空
-*/
+ * 判断数字栈是否为空
+ */
 int isEmpty(NumberStack * stack) {
 	return stack->topIndex < 0;
 }
 
 /**
-* 判断是不是运算符
-*/
+ * 判断是不是运算符
+ */
 int isOperator(char c) {
 	switch (c) {
 	case '+':
@@ -190,16 +190,16 @@ int isOperator(char c) {
 }
 
 /**
-* 判断是不是数字或者小数点
-*/
+ * 判断是不是数字或者小数点
+ */
 int isDigit(char c) {
 	return  (c >= '0' && c <= '9')||c=='.';
 }
 
 
 /**
-* 比较c1与c2的优先级
-*/
+ * 比较c1与c2的优先级
+ */
 char compareOpr(char c1, char c2) {
 	char result = '>';
 		switch (c1)
@@ -231,8 +231,8 @@ char compareOpr(char c1, char c2) {
 }
 
 /**
-*三目运算
-*/
+ * 三目运算
+ */
 double operate(char theta, double a, double b) {
 	double value = 0;
 		switch (theta){
@@ -255,8 +255,8 @@ double operate(char theta, double a, double b) {
 }
 
 /**
-*对已知优先级的两个数进行运算，并从numStack中去掉这个数，从opStack中去掉这个运算符
-*/
+ * 对已知优先级的两个数进行运算，并从numStack中去掉这个数，从opStack中去掉这个运算符
+ */
 int calculate(NumberStack *numStack, OperatorStack *opStack) {
 	double a = getTop(numStack);
 	pop(numStack);
@@ -309,8 +309,10 @@ int main() {
 			}
 		}
 	}
-
-	while (!isEmptyOp(&opStack)) {//遍历完输入的数字后运算可能没有完成
+	/**
+	 * 遍历完输入的数字后运算可能没有完成
+	 */
+	while (!isEmptyOp(&opStack)) {
 		calculate(&numStack, &opStack);
 	}
 	
