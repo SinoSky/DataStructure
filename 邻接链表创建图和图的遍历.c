@@ -132,6 +132,7 @@ int deQueue(LinkQueue *queue, int *element) {
  * 根据构造邻接链表来构造图
  */
 int createGraph(Graph *graph) {
+    EdgeNode *node;
     int vi, vj, k;
     printf("请输入是有向图还是无向图（1代表无向图,其他数字为有向图）:\n");
     scanf("%d",&graph->flag);
@@ -158,7 +159,6 @@ int createGraph(Graph *graph) {
     }
 
     printf("你输入的邻接链表如下：\n");
-    EdgeNode *node;
     for (k = 0; k < graph->vexNum; k++) {
         printf("%d[%c]",k,graph->adjList[k].data);
         node=graph->adjList[k].firstEdge;
